@@ -1,0 +1,13 @@
+language: python
+cache: pip
+python:
+  - "3.5"
+  - "3.6"
+  - "3.7"
+install:
+  - pip install flake8 pytest-cov
+script:
+  - flake8 kinesis_log_handler tests setup.py
+  - pytest --cov=kinesis_log_handler -vv tests/
+after_success:
+  - codecov
