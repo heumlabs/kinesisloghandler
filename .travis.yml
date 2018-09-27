@@ -3,7 +3,7 @@ cache: pip
 python:
   - "3.5"
   - "3.6"
-  - "3.7"
+  # - "3.7" Not now...
 install:
   - pip install flake8 pytest-cov
 script:
