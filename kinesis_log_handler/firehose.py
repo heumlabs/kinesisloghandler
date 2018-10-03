@@ -28,15 +28,17 @@ class FirehoseHandler(logging.Handler):
         self.setLevel(level)
         self._delivery_stream_name = delivery_stream_name
         self._client = boto3.client('firehose', region_name='ap-northeast-1')
-
-    def emit(self, record):
-        data = {
+    
+    def _firehose_record(self, record):
+        return {
             'Data': self.format(record),
         }
+
+    def emit(self, record):
         try:
             self._client.put_record(
                 DeliveryStreamName=self._delivery_stream_name,
-                Record=data
+                Record=self._firehose_record(record)
             )
         except Exception:
             self.handleError(record)
