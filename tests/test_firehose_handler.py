@@ -4,22 +4,29 @@ from unittest.mock import patch
 from kinesis_log_handler.firehose import FirehoseHandler, FirehoseJSONFormatter
 
 
+class MockClientSuccess(object):
+    def put_record(DeliveryStreamName, Record):
+        return True
+
+
 class TestFirehoseHandler(unittest.TestCase):
 
+    def setUp(self):
+        self.logger = logging.getLogger('firehose')
+        self.logger.setLevel(logging.INFO)
+
     @patch('boto3.client')
-    @patch('kinesis_log_handler.firehose.FirehoseHandler.emit')
-    def test_emit_called(self, mock_emit, boto_client):
-        boto_client.return_value = object
-        mock_emit.return_value = None
+    def test_emit_called(self, boto_client):
+        boto_client.return_value = MockClientSuccess
 
-        logger = logging.getLogger('firehose')
-        logger.setLevel(logging.INFO)
+        with self.assertLogs(self.logger) as thlg:
+            fh = FirehoseHandler()
+            assert boto_client.called is True
+            assert isinstance(fh.formatter, FirehoseJSONFormatter) is True
 
-        fh = FirehoseHandler()
-        assert isinstance(fh.formatter, FirehoseJSONFormatter) is True
+            self.logger.addHandler(fh)
+            self.logger.info('logging test')
 
-        logger.addHandler(fh)
-        logger.info('logging test')
-
-        assert mock_emit.called is True
-        assert boto_client.called is True
+            for record in thlg.records:
+                fh_record = fh._firehose_record(record)
+                assert 'Data' in fh_record

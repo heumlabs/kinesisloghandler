@@ -12,9 +12,16 @@ class TestFirehoseFormatter(unittest.TestCase):
             logger.setLevel(logging.INFO)
             logger.info('logging test')
 
+            # log with exc_info
+            try:
+                1/0
+            except ZeroDivisionError:
+                logger.exception('error with exc_info')
             json_fmt = FirehoseJSONFormatter()
 
             for record in thlg.records:
+                if record.exc_info:
+                    assert isinstance(record.exc_info, tuple)
                 jsonify_str = json_fmt.format(record)
                 assert isinstance(jsonify_str, str)
 

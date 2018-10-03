@@ -40,7 +40,7 @@ class FirehoseHandler(logging.Handler):
                 DeliveryStreamName=self._delivery_stream_name,
                 Record=self._firehose_record(record)
             )
-        except Exception:
+        except Exception:  # pragma: no cover
             self.handleError(record)
 
 
