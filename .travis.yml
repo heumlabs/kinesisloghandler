@@ -6,6 +6,7 @@ python:
   # - "3.7" Not now...
 install:
   - pip install flake8 pytest-cov codecov
+  - pip install -r requirements.txt
 script:
   - flake8 kinesis_log_handler tests setup.py
   - pytest --cov=kinesis_log_handler -vv tests/
