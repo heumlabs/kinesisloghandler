@@ -27,7 +27,8 @@ class FirehoseHandler(logging.Handler):
         self.setFormatter(FirehoseJSONFormatter())
         self.setLevel(level)
         self._delivery_stream_name = delivery_stream_name
-        self._client = boto3.client('firehose', region_name='ap-northeast-1')
+        region_name = kwargs.pop('region_name', 'ap-northeast-1')
+        self._client = boto3.client('firehose', region_name=region_name)
 
     def _firehose_record(self, record):
         return {
