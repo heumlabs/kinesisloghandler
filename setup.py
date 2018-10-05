@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 import kinesis_log_handler
 
 REQUIRED_PYTHON = (3, 5)
-README = path.abspath(path.join(path.dirname(__file__), 'README.md'))
+README = path.abspath(path.join(path.dirname(__file__), 'README.rst'))
 EXCLUDE_FROM_PACKAGES = ['tests']
 
 setup(
