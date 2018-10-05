@@ -20,7 +20,8 @@ class TestFirehoseHandler(unittest.TestCase):
         boto_client.return_value = MockClientSuccess
 
         with self.assertLogs(self.logger) as thlg:
-            fh = FirehoseHandler()
+            fh = FirehoseHandler(delivery_stream_name='test_stream',
+                                 region_name='ap-northeast-1')
             assert boto_client.called is True
             assert isinstance(fh.formatter, FirehoseJSONFormatter) is True
 
@@ -28,5 +29,5 @@ class TestFirehoseHandler(unittest.TestCase):
             self.logger.info('logging test')
 
             for record in thlg.records:
-                fh_record = fh._firehose_record(record)
+                fh_record = fh.get_firehose_record(record)
                 assert 'Data' in fh_record

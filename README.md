@@ -22,7 +22,9 @@ import logging
 from kinesis_log_handler.firehose import FirehoseHandler
 
 logger = logging.getLogger('neil')
-fh = FirehoseHandler(region_name='ap-northeast-1')
+fh = FirehoseHandler(
+    delivery_stream_name='your_kinesis_stream_name',
+    region_name='ap-northeast-1')
 logger.addHandler(fh)
 
 logger.warning('Warning!')
