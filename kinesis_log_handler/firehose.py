@@ -60,7 +60,7 @@ class FirehoseJSONFormatter(logging.Formatter):
         self._ensure_ascii = ensure_ascii
 
     def jsonify(self, log_record):
-        return json.dumps(log_record, ensure_ascii=self._ensure_ascii)
+        return json.dumps(log_record, ensure_ascii=self._ensure_ascii)+'\n'
 
     def format(self, record):
         data = {}
