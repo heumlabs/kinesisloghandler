@@ -42,6 +42,9 @@ class FirehoseHandler(logging.Handler):
         }
 
     def emit(self, record):
+        """
+        Emit log recort to aws firehose client
+        """
         try:
             self._client.put_record(
                 DeliveryStreamName=self._delivery_stream_name,
