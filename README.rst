@@ -18,7 +18,7 @@ Install and update using pip
 
 .. code:: bash
 
-    pip install -U kinesis-log-handler
+    pip install -U kinesisloghandler
 
 A Simple Example
 ================
