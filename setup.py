@@ -7,7 +7,7 @@ README = path.abspath(path.join(path.dirname(__file__), 'README.rst'))
 EXCLUDE_FROM_PACKAGES = ['tests']
 
 setup(
-    name='kinesis_log_handler',
+    name='kinesisloghandler',
     version=kinesis_log_handler.__version__,
     description='Python logging handler for sending logs to AWS Kinesis',
     long_description=open(README).read(),
@@ -16,7 +16,7 @@ setup(
     ],
     author='Dumok',
     author_email='nsh330@gmail.com',
-    url='https://github.com/neillab/kinesis_log_handler',
+    url='https://github.com/neillab/kinesisloghandler',
     license='BSD',
     packages=find_packages(exclude=EXCLUDE_FROM_PACKAGES),
     classifiers=[
