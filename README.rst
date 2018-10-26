@@ -43,5 +43,5 @@ TODO
 
 .. |Build Status| image:: https://travis-ci.com/neillab/kinesisloghandler.svg?branch=master
    :target: https://travis-ci.com/neillab/kinesisloghandler
-.. |codecov| image:: https://codecov.io/gh/neillab/kinesis_log_handler/branch/master/graph/badge.svg
-   :target: https://codecov.io/gh/neillab/kinesis_log_handler
+.. |codecov| image:: https://codecov.io/gh/neillab/kinesisloghandler/branch/master/graph/badge.svg
+   :target: https://codecov.io/gh/neillab/kinesisloghandler
