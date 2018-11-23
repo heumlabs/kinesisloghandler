@@ -43,7 +43,7 @@ class FirehoseHandler(logging.Handler):
 
     def emit(self, record):
         """
-        Emit log recort to aws firehose client
+        Emit log record to aws firehose client
         """
         try:
             self._client.put_record(
